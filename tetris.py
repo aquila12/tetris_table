@@ -128,7 +128,10 @@ class Snake():
             return False
         if next_seg == self.target:
             log.debug('Target got: %s', next_seg)
-            self.row_sound.play()
+            try:
+                self.row_sound.play()
+            except:
+                pass
             self.score += 1
             if len(self.snake_segments) > levelup_length:
                 self.new_level()
