@@ -49,6 +49,9 @@ logging.basicConfig(level=logging.DEBUG)
 board_width = 10
 board_height = 20
 
+start_x = int(board_width / 2)
+start_y = int(board_height / 2)
+
 levelup_length = 20
 
 BUTTONEVENT = USEREVENT+1
@@ -89,7 +92,7 @@ class Snake():
         """Reset the level"""
         self.board = new_board()
         self.grow_count    = 2    # 3 blocks long to start
-        self.snake_segments = [[int(board_width / 2), int(board_height / 2)]]
+        self.snake_segments = [[start_x, start_y]]
         self.move_vector = [1,0]
         self.next_move_vector = False
         self.last_tick = pygame.time.get_ticks()
@@ -110,7 +113,7 @@ class Snake():
 
     def set_direction(self, vector):
         if vector[0] == -self.move_vector[0] and vector[1] == -self.move_vector[1]:
-            print ("Supress backward movement")
+            log.debug("Supress backward movement")
         elif not self.next_move_vector:
             self.move_vector = vector
         self.next_move_vector = vector
